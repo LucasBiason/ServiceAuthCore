@@ -1,34 +1,28 @@
 # authservice
 
-API for Users and customers control. Can be used to start new projects from zero.
-Authentication with JWT at Django Rest Framework
+Este projeto é uma API para controle de usuários de uma aplicação, feito em Django.
+A Autenticação é feita no modelo Central Authentication Service (CAS)
 
-#### JWT Auth
+Na aplicação jwtauthcore tem o serviço de autenticação e cadastro de usuários.
+Na aplicação test_application é apresentada uma aplicação de teste para a autenticação,
+com um backend de autenticação que requisita a validação do usuário para a primeira aplicação
 
-import coreapi, requests
 
-*Auth by login with you dont have token yet*
-```python
-result = requests.post(
-    url='http://127.0.0.1:5009/auth/v1/token/', 
-    json={
-        "username": "lucas", 
-        "password": "python2525"
-    }
-)
-result = result.json()
-token = result['token']
-print("result > ", result)
+### Instalação:
 
+1) instalar requirements.txt
+```
+pip install -r requirements.txt
 ```
 
-Auth by token with you have it yet
-*Auth by token with you have it yet*
-```python
-auth = coreapi.auth.TokenAuthentication(
-    scheme='JWT',
-    token=token
-)
-client = coreapi.Client(auth=auth)
-print("client by token > ", client)
+2) Criar os arquivos .env em ambas as aplicações com os dados de conexão ao banco de dados
+
+3) entrar na jwtauthcore e aplicação migrações
 ```
+python manage.py migrate
+```
+
+Para testar abasta rodar runserver na jwtauthcore com a porta 5009 e test_application com a porta 5008
+
+
+TODO: Tacar o Docker...
